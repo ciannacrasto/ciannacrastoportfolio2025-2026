@@ -1,0 +1,177 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+      crossorigin="anonymous"
+    />
+    <title>Portfolio</title>
+    <style>
+      body {
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+          Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue",
+          sans-serif;
+        background-color: #ffffff;
+      }
+      div.gallery {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: flex-start;
+      }
+
+      div.gallery-item {
+        margin: 5px;
+        width: calc(25% - 20px);
+      }
+
+      div.gallery-item:hover {
+        border: 1px solid hwb(207 47% 0%);
+      }
+
+      div.gallery-item img {
+        width: 100%;
+        height: auto;
+      }
+
+      div.gallery-item div.desc {
+        padding: 15px;
+        text-align: center;
+      }
+
+      @media only screen and (max-width: 768px) {
+        div.gallery-item {
+          width: calc(50% - 20px);
+        }
+      }
+
+      @media only screen and (max-width: 480px) {
+        div.gallery-item {
+          width: calc(100% - 20px);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+      <div class="container-xxl">
+        <a href="./../index.html" class="navbar-brand">
+          <a class="navbar-brand" href="./../index.html">
+            <img
+              src="imagesfinalversions/4.jpg"
+              alt="DBCLogo"
+              style="width: 40px"
+              class="rounded-pill"
+            />
+          </a>
+          <span class="fw-bold text-white">Cianna Crasto</span>
+        </a>
+
+        <div
+          class="collape navbar-collapse justify-content-end align-center navbar-dark"
+          id="main-nav"
+        >
+          <ul class="navbar-nav nav-underline">
+            <li class="nav-item">
+              <a class="nav-link" href="./../index.html">About </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="Portfoliolandingpage.html">Work</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="./../index.html">Contact</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <section id="portfoliolanding">
+      <div class="container-lg">
+        <div class="row justify-content-start align-text-center m-3">
+          <div class="col-md-5 text-center text-md-start">
+            <h3 class="fw-bold text-primary">my work!</h3>
+          </div>
+        </div>
+      </div>
+      <div class="container-xxl bg-white">
+        <div class="gallery justify-content-end m-5">
+          <div class="gallery-item text-primary">
+            <a target="_blank" href="project6.html">
+              <img
+                src="imagesfinalversions/CoriArtistCreativePost-100 (1).jpg"
+                alt="Forest"
+                width="400"
+                height="200"
+              />
+            </a>
+            <div class="desc">Social Media Design</div>
+          </div>
+
+          <div class="gallery-item text-primary">
+            <a target="_blank" href="project5.html">
+              <img
+                src="imagesfinalversions/edit3.jpg"
+                alt="Northern Lights"
+                width="600"
+                height="400"
+              />
+            </a>
+            <div class="desc">Food and Beverage Image Edits</div>
+          </div>
+
+          <div class="gallery-item text-primary">
+            <a target="_blank" href="project4.html">
+              <img
+                src="imagesfinalversions/5.jpg"
+                alt="Mountains"
+                width="600"
+                height="400"
+              />
+            </a>
+            <div class="desc">Art Inspired Posters</div>
+          </div>
+        </div>
+        <div class="gallery justify-content-end m-5">
+          <div class="gallery-item text-primary">
+            <a target="_blank" href="project1.html">
+              <img
+                src="imagesfinalversions/1380.png"
+                alt="Forest"
+                width="600"
+                height="400"
+              />
+            </a>
+            <div class="desc">Michie's Munchie's</div>
+          </div>
+
+          <div class="gallery-item text-primary">
+            <a target="_blank" href="project2.html">
+              <img
+                src="imagesfinalversions/mockup.png"
+                alt="Northern Lights"
+                width="600"
+                height="400"
+              />
+            </a>
+            <div class="desc">Esque</div>
+          </div>
+
+          <div class="gallery-item text-primary">
+            <a target="_blank" href="project3.html">
+              <img
+                src="imagesfinalversions/website.png"
+                alt="Mountains"
+                width="600"
+                height="400"
+              />
+            </a>
+            <div class="desc">Portfolio</div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </body>
+</html>
