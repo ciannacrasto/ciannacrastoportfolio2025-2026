@@ -10,33 +10,47 @@
       integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
       crossorigin="anonymous"
     />
+    <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet" />
     <title>Cianna Portfolio 2025-26</title>
 
     <style>
+      /* ── Global ── */
       body {
         font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
           Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue",
           sans-serif;
         background-color: #ffffff;
+        overflow-x: hidden;
       }
 
-      .header {
-        height: 10vh;
-        width: 100vw;
+      /* ── Consistent page width for every section ── */
+      .page-section {
+        width: 100%;
+        max-width: 1320px;
+        margin: 0 auto;
+        padding-left: 24px;
+        padding-right: 24px;
       }
 
-      .header video {
-        min-width: 100%;
-        min-height: 100%;
-        width: auto;
+      /* ── Hero video ── */
+      #hero-video {
+        width: 100%;
+        max-width: 1320px;
+        margin: 0 auto;
+        display: block;
+        padding-left: 24px;
+        padding-right: 24px;
+      }
+
+      #hero-video video {
+        width: 100%;
         height: auto;
-        object-fit: contain;
+        display: block;
       }
 
-      /* Scrolling marquee */
+      /* ── Marquee ── */
       .scrolling-text-container {
         background-color: #0088ff;
-        border-radius: 4px;
         overflow: hidden;
       }
 
@@ -50,87 +64,178 @@
 
       .scrolling-text {
         display: flex;
-        color: rgb(255, 255, 255);
+        color: #ffffff;
+        flex-shrink: 0;
       }
 
       .scrolling-text-item {
-        padding: 0 30px;
+        padding: 0 20px;
       }
 
-      .scrolling-text-inner > div {
-        animation: var(--direction) var(--marquee-speed) linear infinite;
-      }
-
-      .scrolling-text-container:hover .scrolling-text-inner > div {
-        animation-play-state: running;
+      /* Each track animates independently, seamlessly */
+      .marquee-track {
+        animation: scroll-left 18s linear infinite;
       }
 
       @keyframes scroll-left {
-        0% { transform: translateX(0%); }
+        0%   { transform: translateX(0); }
         100% { transform: translateX(-100%); }
       }
 
-      @keyframes scroll-right {
-        0% { transform: translateX(-100%); }
-        100% { transform: translateX(0%); }
+      /* ── Timeline ── */
+      .timeline {
+        position: relative;
+        padding-left: 32px;
       }
 
-      @media (max-width: 600px) {
-        html { font-size: 12px; }
-        :root {
-          --marquee-width: 100vw;
-          --marquee-height: 16vh;
-          --marquee-elements-displayed: 3;
-        }
-        .marquee:before,
-        .marquee:after { width: 5rem; }
+      .timeline::before {
+        content: '';
+        position: absolute;
+        left: 8px;
+        top: 6px;
+        bottom: 6px;
+        width: 2px;
+        background: linear-gradient(to bottom, #0088ff, #cce4ff);
+        border-radius: 2px;
       }
 
-      .services {
-        background-color: black;
+      .timeline-item {
+        position: relative;
+        margin-bottom: 32px;
       }
 
+      .timeline-item:last-child {
+        margin-bottom: 0;
+      }
+
+      .timeline-dot {
+        position: absolute;
+        left: -28px;
+        top: 4px;
+        width: 14px;
+        height: 14px;
+        border-radius: 50%;
+        background: #fff;
+        border: 3px solid #0088ff;
+        box-shadow: 0 0 0 3px #cce4ff;
+      }
+
+      .timeline-dot.active {
+        background: #0088ff;
+        box-shadow: 0 0 0 4px #cce4ff;
+        animation: pulse 1.8s infinite;
+      }
+
+      @keyframes pulse {
+        0%, 100% { box-shadow: 0 0 0 4px #cce4ff; }
+        50%       { box-shadow: 0 0 0 8px #e0f0ff; }
+      }
+
+      .timeline-content {
+        background: #fff;
+        border-radius: 12px;
+        padding: 14px 18px;
+        box-shadow: 0 2px 12px rgba(0,136,255,0.08);
+      }
+
+      .timeline-tag {
+        font-size: 11px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        color: #0088ff;
+        background: #e8f4ff;
+        padding: 2px 10px;
+        border-radius: 50px;
+        display: inline-block;
+        margin-bottom: 6px;
+      }
+
+      .active-tag {
+        background: #0088ff;
+        color: #fff;
+      }
+      .skill-label {
+        display: flex;
+        justify-content: space-between;
+        font-weight: 600;
+        margin-bottom: 4px;
+        color: #333;
+      }
+
+      .skill-bar-track {
+        background-color: #e9ecef;
+        border-radius: 50px;
+        overflow: hidden;
+        height: 12px;
+        margin-bottom: 16px;
+      }
+
+      .skill-bar-fill {
+        height: 100%;
+        border-radius: 50px;
+        width: 0%;
+        transition: width 1.4s ease-in-out;
+        background: linear-gradient(90deg, #0088ff, #0056cc);
+      }
+
+      .skill-bar-fill.dark {
+        background: linear-gradient(90deg, #444, #000);
+      }
+
+      /* ── Services ── */
+      .services-bg {
+        background-color: #000;
+        width: 100%;
+      }
+
+      /* ── Footer ── */
       footer {
         text-align: center;
-        padding: 3px;
         background-color: rgb(36, 134, 253);
         color: white;
       }
 
-      footer a {
-        color: #ffffff;
-      }
+      footer a { color: #ffffff; }
 
-      /* Typed.js styles */
+      /* ── Typed.js ── */
       #typed-text {
         color: #0088ff;
         font-weight: bold;
       }
 
       .typed-cursor {
+        color: #0088ff;
         font-weight: 100;
         opacity: 1;
         animation: blink 0.7s infinite;
-        color: #0088ff;
       }
 
       @keyframes blink {
         0%, 100% { opacity: 1; }
-        50% { opacity: 0; }
+        50%       { opacity: 0; }
+      }
+
+      /* ── Responsive ── */
+      @media (max-width: 600px) {
+        html { font-size: 13px; }
+        .page-section,
+        #hero-video { padding-left: 16px; padding-right: 16px; }
       }
     </style>
   </head>
 
   <body>
-    <!-- NAVBAR -->
+
+    <!-- ══════════════ NAVBAR ══════════════ -->
     <nav class="navbar navbar-expand-sm navbar-dark bg-dark fixed-top">
       <div class="container-lg">
-        <a href="index.html" class="navbar-brand d-flex align-items-center">
+        <a href="index.html" class="navbar-brand d-flex align-items-center gap-2">
           <img
             src="codeassets/imagesfinalversions/4.jpg"
-            alt="DBCLogo"
-            style="width: 40px"
-            class="rounded-pill me-2"
+            alt="Logo"
+            style="width:40px"
+            class="rounded-pill"
           />
           <span class="fw-bold text-white">Cianna Crasto</span>
         </a>
@@ -147,79 +252,74 @@
           <span class="navbar-toggler-icon"></span>
         </button>
 
-        <div
-          class="collapse navbar-collapse justify-content-end"
-          id="main-nav"
-        >
+        <div class="collapse navbar-collapse justify-content-end" id="main-nav">
           <ul class="navbar-nav nav-underline">
-            <li class="nav-item">
-              <a class="nav-link" href="#aboutme">About</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="codeassets/Portfoliolandingpage.html">Work</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#contact">Contact</a>
-            </li>
+            <li class="nav-item"><a class="nav-link" href="#aboutme">About</a></li>
+            <li class="nav-item"><a class="nav-link" href="codeassets/Portfoliolandingpage.html">Work</a></li>
+            <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
           </ul>
         </div>
       </div>
     </nav>
 
-    <!-- HERO VIDEO -->
-    <section id="header" class="p-0">
-      <div class="container-fluid m-0">
-        <div class="w-100">
-          <video width="100%" height="100%" autoplay muted loop playsinline>
-            <source
-              src="codeassets/imagesfinalversions/Comp 1_1.mp4"
-              type="video/mp4"
-            />
-          </video>
-        </div>
+    <!-- ══════════════ HERO VIDEO ══════════════ -->
+    <div class="mt-5 pt-4">
+      <div id="hero-video">
+        <video autoplay muted loop playsinline>
+          <source src="codeassets/imagesfinalversions/Comp 1_1.mp4" type="video/mp4" />
+        </video>
       </div>
-    </section>
+    </div>
 
-    <!-- ABOUT ME -->
+    <!-- ══════════════ ABOUT ME ══════════════ -->
     <section id="aboutme">
+
+      <!-- Marquee: full width for visual effect -->
       <div class="scrolling-text-container">
-        <div
-          class="scrolling-text-inner"
-          style="--marquee-speed: 20s; --direction: scroll-left"
-          role="marquee"
-        >
-          <div class="scrolling-text">
+        <div class="scrolling-text-inner" role="marquee">
+          <!-- Two identical sets so it loops seamlessly -->
+          <div class="scrolling-text marquee-track">
             <div class="scrolling-text-item">about me</div>
+            <div class="scrolling-text-item">✦</div>
             <div class="scrolling-text-item">about me</div>
+            <div class="scrolling-text-item">✦</div>
             <div class="scrolling-text-item">about me</div>
+            <div class="scrolling-text-item">✦</div>
             <div class="scrolling-text-item">about me</div>
+            <div class="scrolling-text-item">✦</div>
             <div class="scrolling-text-item">about me</div>
+            <div class="scrolling-text-item">✦</div>
             <div class="scrolling-text-item">about me</div>
+            <div class="scrolling-text-item">✦</div>
+          </div>
+          <!-- Duplicate for seamless loop -->
+          <div class="scrolling-text marquee-track" aria-hidden="true">
             <div class="scrolling-text-item">about me</div>
+            <div class="scrolling-text-item">✦</div>
             <div class="scrolling-text-item">about me</div>
+            <div class="scrolling-text-item">✦</div>
             <div class="scrolling-text-item">about me</div>
+            <div class="scrolling-text-item">✦</div>
             <div class="scrolling-text-item">about me</div>
+            <div class="scrolling-text-item">✦</div>
             <div class="scrolling-text-item">about me</div>
+            <div class="scrolling-text-item">✦</div>
             <div class="scrolling-text-item">about me</div>
+            <div class="scrolling-text-item">✦</div>
           </div>
         </div>
       </div>
 
-      <br />
-      <div class="container-lg">
-        <div class="row justify-content-center align-items-center">
-          <div class="col-md-5 text-center text-md-start">
-            <h1>
-              <div class="display-5 fw-medium">
-                hello!
-                <div class="display-1 fw-bold">I'm Cianna</div>
-                <!-- Typed.js: span is empty on purpose, JS fills it in -->
-                <div class="display-6 fw-medium text-primary">
-                  <span id="typed-text"></span>
-                </div>
-              </div>
-            </h1>
-            <p class="lead my-4 text-muted">
+      <div class="page-section py-5">
+        <div class="row justify-content-center align-items-center g-4">
+
+          <div class="col-md-5 text-center text-md-start" data-aos="fade-right">
+            <div class="display-5 fw-medium">hello!</div>
+            <div class="display-1 fw-bold">I'm Cianna</div>
+            <div class="display-6 fw-medium text-primary mb-3">
+              <span id="typed-text"></span>
+            </div>
+            <p class="lead text-muted mb-4">
               My goal is to create designs that are fun, lively and meet the
               goals of my clientele by aligning random shapes and texts to
               create a cohesive design.
@@ -227,146 +327,171 @@
             <a
               href="./codeassets/Portfoliolandingpage.html"
               class="btn btn-lg rounded-5 bg-primary text-white fw-bold"
-            >
-              my work!
-            </a>
+            >my work!</a>
           </div>
-          <div class="col-md-6 text-center d-none d-md-block">
+
+          <div class="col-md-6 text-center d-none d-md-block" data-aos="fade-left">
             <img
-              class="img-thumbnail bg-primary-subtle"
+              class="img-thumbnail bg-primary-subtle w-100"
               src="codeassets/imagesfinalversions/WhatsApp Image 2025-11-24 at 12.31.46 AM.jpeg"
-              alt="hi! im taking a load off"
+              alt="Cianna Crasto"
             />
           </div>
-        </div>
-      </div>
-      <br />
-    </section>
 
-    <br />
-
-    <!-- EXPERIENCES -->
-    <section id="experiences">
-      <div class="container-lg">
-        <div class="row">
-          <div class="col-md-6 text-center text-md-start">
-            <div class="btn btn-lg rounded-5 bg-primary text-white fw-bold">
-              experiences and extra curriculars
-            </div>
-            <br /><br />
-
-            <div class="btn btn-lg rounded-5 bg-primary-subtle text-primary fw-medium">
-              experiences
-            </div>
-            <p class="lead fw-medium m-2">
-              CFA COORDINATOR Inferno (College Fest)- 2023 <br />
-              Internship @Pomelo Social, Pune May 2024- July 2024
-            </p>
-
-            <div class="btn btn-lg rounded-5 bg-primary-subtle text-primary fw-medium">
-              workshops
-            </div>
-            <p class="lead fw-medium m-2">Figma-Work Shop C8 Growth School</p>
-
-            <div class="btn btn-lg rounded-5 bg-primary-subtle text-primary fw-medium">
-              education
-            </div>
-            <p class="lead fw-medium m-2">
-              Communication Design- Atlas Skilltech University- ISDI
-            </p>
-
-            <div class="btn btn-lg rounded-5 bg-primary-subtle text-primary fw-medium">
-              currently building
-            </div>
-            <p class="lead fw-medium m-2">Instagram- designsbycianna</p>
-          </div>
-
-          <div class="col-md-6 text-center text-md-start">
-            <h3 class="text-primary">softwares</h3>
-            <br /><br />
-
-            <div class="btn btn-lg rounded-5 bg-primary-subtle text-primary fw-bold">
-              adobe photoshop
-            </div>
-            <br /><br />
-            <div class="btn btn-lg rounded-5 bg-black text-white fw-bold">
-              adobe illustrator
-            </div>
-            <br /><br />
-            <div class="btn btn-lg rounded-5 bg-primary-subtle text-primary fw-bold">
-              adobe indesign
-            </div>
-            <br /><br />
-            <div class="btn btn-lg rounded-5 bg-black text-white fw-bold">
-              adobe premiere pro
-            </div>
-            <br /><br />
-            <div class="btn btn-lg rounded-5 bg-primary-subtle text-primary fw-bold">
-              adobe after effects
-            </div>
-            <br /><br />
-            <div class="btn btn-lg rounded-5 bg-black text-white fw-bold">
-              figma
-            </div>
-            <br /><br />
-          </div>
         </div>
       </div>
     </section>
 
-    <br />
+    <!-- ══════════════ EXPERIENCES ══════════════ -->
+    <section id="experiences" class="py-5" style="background-color: #e8f4ff;">
+      <div class="page-section">
 
-    <!-- SERVICES -->
-    <section id="services" class="mt-1">
-      <div class="container-lg bg-black">
-        <div class="row">
-          <h3 class="text-primary m-2 fw-bold">what can i do?</h3>
+        <div class="row g-5">
 
-          <div class="card m-2 bg-black" style="width: 18rem">
-            <img src="./codeassets/imagesfinalversions/mockup.png" class="card-img-top" alt="branding and packaging" />
-            <div class="card-body">
-              <h5 class="card-title text-primary bg-black">branding and packaging</h5>
+          <!-- Left: Timeline -->
+          <div class="col-md-6" data-aos="fade-right">
+            <h4 class="fw-bold text-dark mb-4">experiences & extras</h4>
+
+            <div class="timeline">
+
+              <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content">
+                  <span class="timeline-tag">2023</span>
+                  <h6 class="fw-bold mb-1">CFA Coordinator — Inferno</h6>
+                  <p class="text-muted mb-0">College Fest, coordinated creative arts events</p>
+                </div>
+              </div>
+
+              <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content">
+                  <span class="timeline-tag">May – Jul 2024</span>
+                  <h6 class="fw-bold mb-1">Internship — Pomelo Social</h6>
+                  <p class="text-muted mb-0">Pune — Social media & design work</p>
+                </div>
+              </div>
+
+              <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content">
+                  <span class="timeline-tag">Apr 2025</span>
+                  <h6 class="fw-bold mb-1">Figma Workshop — C8 Growth School</h6>
+                  <p class="text-muted mb-0">UI/UX design fundamentals</p>
+                </div>
+              </div>
+
+              <div class="timeline-item">
+                <div class="timeline-dot active"></div>
+                <div class="timeline-content">
+                  <span class="timeline-tag active-tag">Ongoing · Year 2</span>
+                  <h6 class="fw-bold mb-1">Communication Design — ISDI</h6>
+                  <p class="text-muted mb-0">Atlas Skilltech University</p>
+                </div>
+              </div>
+
+              <div class="timeline-item">
+                <div class="timeline-dot active"></div>
+                <div class="timeline-content">
+                  <span class="timeline-tag active-tag">Now</span>
+                  <h6 class="fw-bold mb-1">Building — @designsbycianna</h6>
+                  <p class="text-muted mb-0">Growing my design presence on Instagram</p>
+                </div>
+              </div>
+
             </div>
           </div>
 
-          <div class="card m-2 bg-black" style="width: 18rem">
-            <img src="./codeassets/imagesfinalversions/7.jpg" class="card-img-top" alt="social media collaterals" />
-            <div class="card-body">
-              <h5 class="card-title text-primary bg-black">social media collaterals</h5>
-            </div>
+          <!-- Right: Skill bars -->
+          <div class="col-md-6" data-aos="fade-left">
+            <h4 class="fw-bold text-dark mb-4">softwares</h4>
+
+            <div class="skill-label"><span>Adobe Photoshop</span><span>75%</span></div>
+            <div class="skill-bar-track"><div class="skill-bar-fill" data-width="75"></div></div>
+
+            <div class="skill-label"><span>Adobe Illustrator</span><span>75%</span></div>
+            <div class="skill-bar-track"><div class="skill-bar-fill dark" data-width="75"></div></div>
+
+            <div class="skill-label"><span>Figma</span><span>50%</span></div>
+            <div class="skill-bar-track"><div class="skill-bar-fill" data-width="50"></div></div>
+
+            <div class="skill-label"><span>Adobe Premiere Pro</span><span>50%</span></div>
+            <div class="skill-bar-track"><div class="skill-bar-fill dark" data-width="50"></div></div>
+
+            <div class="skill-label"><span>Adobe InDesign</span><span class="text-muted fst-italic" style="font-size:0.85rem">learning</span></div>
+            <div class="skill-bar-track"><div class="skill-bar-fill" data-width="30"></div></div>
+
+            <div class="skill-label"><span>Adobe After Effects</span><span class="text-muted fst-italic" style="font-size:0.85rem">learning</span></div>
+            <div class="skill-bar-track"><div class="skill-bar-fill dark" data-width="25"></div></div>
           </div>
 
-          <div class="card m-2 bg-black" style="width: 18rem">
-            <img src="./codeassets/imagesfinalversions/9924.jpg" class="card-img-top" alt="image edits" />
-            <div class="card-body">
-              <h5 class="card-title text-primary bg-black">image edits</h5>
-            </div>
-          </div>
-
-          <div class="card m-2 bg-black" style="width: 18rem">
-            <img src="./codeassets/imagesfinalversions/4.jpg" class="card-img-top" alt="video editing" />
-            <div class="card-body text-primary bg-black">
-              <h5 class="card-title">video editing</h5>
-            </div>
-          </div>
         </div>
-
-        <a
-          href="./codeassets/Portfoliolandingpage.html"
-          class="btn btn-lg rounded-5 bg-primary-subtle text-primary fw-bold m-2"
-        >
-          check out my past projects
-        </a>
-        <br />
       </div>
     </section>
 
-    <!-- CONTACT -->
+    <!-- ══════════════ SERVICES ══════════════ -->
+    <section id="services">
+      <div class="services-bg py-5">
+        <div class="page-section">
+          <h3 class="text-primary fw-bold mb-4">what can i do?</h3>
+          <div class="row g-3 justify-content-center">
+
+            <div class="col-6 col-md-3" data-aos="fade-up" data-aos-delay="0">
+              <div class="card bg-black border-0 h-100">
+                <img src="./codeassets/imagesfinalversions/mockup.png" class="card-img-top" alt="branding and packaging" />
+                <div class="card-body px-0">
+                  <h5 class="card-title text-primary">branding and packaging</h5>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-6 col-md-3" data-aos="fade-up" data-aos-delay="100">
+              <div class="card bg-black border-0 h-100">
+                <img src="./codeassets/imagesfinalversions/7.jpg" class="card-img-top" alt="social media collaterals" />
+                <div class="card-body px-0">
+                  <h5 class="card-title text-primary">social media collaterals</h5>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-6 col-md-3" data-aos="fade-up" data-aos-delay="200">
+              <div class="card bg-black border-0 h-100">
+                <img src="./codeassets/imagesfinalversions/9924.jpg" class="card-img-top" alt="image edits" />
+                <div class="card-body px-0">
+                  <h5 class="card-title text-primary">image edits</h5>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-6 col-md-3" data-aos="fade-up" data-aos-delay="300">
+              <div class="card bg-black border-0 h-100">
+                <img src="./codeassets/imagesfinalversions/4.jpg" class="card-img-top" alt="video editing" />
+                <div class="card-body px-0">
+                  <h5 class="card-title text-primary">video editing</h5>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <div class="mt-4 text-center">
+            <a
+              href="./codeassets/Portfoliolandingpage.html"
+              class="btn btn-lg rounded-5 bg-primary-subtle text-primary fw-bold"
+            >check out my past projects</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════ CONTACT ══════════════ -->
     <section id="contact">
-      <div class="container-lg bg-primary">
-        <div class="text-center p-3 text-white">
-          <h2>Get In Touch</h2>
-          <p class="lead">Questions to ask? Fill out the form to contact me directly</p>
+      <div class="bg-primary py-5">
+        <div class="page-section">
+          <div class="text-center text-white mb-4">
+            <h2>Get In Touch</h2>
+            <p class="lead">Questions to ask? Fill out the form to contact me directly</p>
+          </div>
 
           <form
             accept-charset="UTF-8"
@@ -374,53 +499,36 @@
             method="post"
             enctype="multipart/form-data"
             target="_blank"
-            id="wpform"
           >
-            <div class="row justify-content-center my-5">
+            <div class="row justify-content-center">
               <div class="col-lg-6">
-                <label for="email" class="form-label">Email Address:</label>
-                <div class="mb-4 input-group">
-                  <span class="input-group-text"></span>
-                  <input
-                    type="email"
-                    class="form-control"
-                    name="email"
-                    placeholder="e.g. mario@example.com"
-                  />
+
+                <label for="email" class="form-label text-white">Email Address:</label>
+                <div class="mb-3">
+                  <input type="email" class="form-control" name="email" placeholder="e.g. mario@example.com" />
                 </div>
 
-                <label for="name" class="form-label">Name:</label>
-                <div class="mb-4 input-group">
-                  <span class="input-group-text"></span>
-                  <input
-                    type="text"
-                    class="form-control"
-                    name="name"
-                    placeholder="E.g. Mario"
-                  />
+                <label for="name" class="form-label text-white">Name:</label>
+                <div class="mb-3">
+                  <input type="text" class="form-control" name="name" placeholder="E.g. Mario" />
                 </div>
 
-                <label for="subject" class="form-label">What is your question about?:</label>
-                <select class="form-select" id="subject" name="subject">
+                <label for="subject" class="form-label text-white">What is your question about?</label>
+                <select class="form-select mb-3" id="subject" name="subject">
                   <option value="Projects">Projects Query</option>
                   <option value="Pricing">Pricing Query</option>
                   <option value="Other">Other query</option>
                 </select>
 
-                <div class="form-floating mb-4 mt-5">
-                  <textarea
-                    id="query"
-                    class="form-control"
-                    style="height: 140px"
-                    name="message"
-                    required
-                  ></textarea>
+                <div class="form-floating mb-4">
+                  <textarea id="query" class="form-control" style="height:140px" name="message" required></textarea>
                   <label for="query">Your query...</label>
                 </div>
 
-                <div class="mb-4 text-center">
-                  <button type="submit" class="btn btn-dark">Submit</button>
+                <div class="text-center">
+                  <button type="submit" class="btn btn-dark btn-lg">Submit</button>
                 </div>
+
               </div>
             </div>
           </form>
@@ -428,36 +536,28 @@
       </div>
     </section>
 
-    <!-- FOOTER -->
-    <footer class="container-lg">
-      <p>
+    <!-- ══════════════ FOOTER ══════════════ -->
+    <footer class="py-3">
+      <p class="mb-0">
         or email us @
-        <a href="mailto:ciannacrasto06@gmail.com">ciannacrasto06@gmail.com</a>
-        or dm us
+        <a href="mailto:crastocianna@gmail.com">crastocianna@gmail.com</a>
+        &nbsp;or dm us&nbsp;
         <a href="https://www.instagram.com/designsbycianna/">@designsbycianna</a>
       </p>
     </footer>
 
-    <!-- ===================== SCRIPTS ===================== -->
-
-    <!-- 1. Typed.js CDN -->
+    <!-- ══════════════ SCRIPTS ══════════════ -->
     <script src="https://unpkg.com/typed.js@2.1.0/dist/typed.umd.js"></script>
-
-    <!-- 2. Bootstrap JS -->
+    <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
       crossorigin="anonymous"
     ></script>
 
-    <!-- 3. Your custom scripts — ONE script tag only -->
     <script>
-      // Bootstrap tooltips
-      const tooltips = document.querySelectorAll('.tt');
-      tooltips.forEach(t => { new bootstrap.Tooltip(t); });
-
-      // Typed.js animation
-      var typed = new Typed('#typed-text', {
+      // Typed.js
+      new Typed('#typed-text', {
         strings: [
           'communication designer.',
           'brand designer.',
@@ -470,6 +570,21 @@
         backDelay: 1500,
         loop: true
       });
+
+      // AOS
+      AOS.init({ once: true, duration: 800 });
+
+      // Skill bars — animate when scrolled into view
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.style.width = entry.target.dataset.width + '%';
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.3 });
+
+      document.querySelectorAll('.skill-bar-fill').forEach(bar => observer.observe(bar));
     </script>
 
   </body>
