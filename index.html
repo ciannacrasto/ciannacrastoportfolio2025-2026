@@ -32,20 +32,46 @@
         padding-right: 24px;
       }
 
-      /* ── Hero video ── */
-      #hero-video {
-        width: 100%;
-        max-width: 1320px;
-        margin: 0 auto;
-        display: block;
-        padding-left: 24px;
-        padding-right: 24px;
+      /* ── Hero zoom scroll ── */
+      #hero-zoom {
+        position: relative;
+        height: 100vh;
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: #ffffff;
       }
 
-      #hero-video video {
-        width: 100%;
-        height: auto;
-        display: block;
+      #hero-bg {
+        position: absolute;
+        inset: 0;
+        background-image: url('codeassets/imagesfinalversions/Artboard_1mdpi.jpg');        background-size: cover;
+        background-position: center;
+        transform-origin: center center;
+        will-change: transform;
+      }
+
+      #hero-overlay {
+        position: relative;
+        z-index: 2;
+        text-align: center;
+        transition: opacity 0.1s linear;
+        will-change: opacity;
+      }
+
+      .hero-scroll-hint {
+        font-size: 0.85rem;
+        color: #333;
+        opacity: 0.6;
+        letter-spacing: 0.1em;
+        margin-top: 40vh;
+        animation: bounce 2s ease-in-out infinite;
+      }
+
+      @keyframes bounce {
+        0%, 100% { transform: translateY(0); }
+        50%       { transform: translateY(6px); }
       }
 
       /* ── Marquee ── */
@@ -228,11 +254,11 @@
   <body>
 
     <!-- ══════════════ NAVBAR ══════════════ -->
-    <nav class="navbar navbar-expand-sm navbar-dark bg-dark fixed-top">
+    <nav class="navbar navbar-expand-sm navbar-dark fixed-top" id="main-navbar" style="background: transparent; transition: background 0.4s;">
       <div class="container-lg">
         <a href="index.html" class="navbar-brand d-flex align-items-center gap-2">
           <img
-            src="codeassets/imagesfinalversions/Artboard 1mdpi"
+            src="codeassets/imagesfinalversions/Artboard 1mdpi.jpg"
             alt="Logo"
             style="width:40px"
             class="rounded-pill"
@@ -262,12 +288,11 @@
       </div>
     </nav>
 
-    <!-- ══════════════ HERO VIDEO ══════════════ -->
-    <div class="mt-5 pt-4">
-      <div id="hero-video">
-        <video autoplay muted loop playsinline>
-          <source src="codeassets/imagesfinalversions/Comp 1_1.mp4" type="video/mp4" />
-        </video>
+    <!-- ══════════════ HERO ══════════════ -->
+    <div id="hero-zoom">
+      <div id="hero-bg"></div>
+      <div id="hero-overlay">
+        <p class="hero-scroll-hint">scroll</p>
       </div>
     </div>
 
@@ -557,6 +582,34 @@
     ></script>
 
     <script>
+      // Navbar turns dark after scrolling past hero
+      const navbar = document.getElementById('main-navbar');
+      window.addEventListener('scroll', () => {
+        if (window.scrollY > window.innerHeight * 0.8) {
+          navbar.style.background = '#212529';
+        } else {
+          navbar.style.background = 'transparent';
+        }
+      });
+
+      // Scroll zoom hero effect
+      const heroBg = document.getElementById('hero-bg');
+      const heroOverlay = document.getElementById('hero-overlay');
+      const heroZoom = document.getElementById('hero-zoom');
+
+      window.addEventListener('scroll', () => {
+        const scrollY = window.scrollY;
+        const heroH = heroZoom.offsetHeight;
+        const progress = Math.min(scrollY / heroH, 1);
+
+        // Zoom in the background as user scrolls
+        const scale = 1 + progress * 0.6;
+        heroBg.style.transform = `scale(${scale})`;
+
+        // Fade out the text
+        heroOverlay.style.opacity = 1 - progress * 2;
+      });
+
       // Typed.js
       new Typed('#typed-text', {
         strings: [
