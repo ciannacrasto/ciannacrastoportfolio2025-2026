@@ -310,31 +310,32 @@
         </div>
       </div>
 
-      <div class="page-section py-5">
-        <div class="row justify-content-center align-items-center g-4">
+      <div class="page-section py-3">
+        <div class="row justify-content-center align-items-center g-3">
 
           <div class="col-md-5 text-center text-md-start" data-aos="fade-right">
-            <div class="display-5 fw-medium">hello!</div>
-            <div class="display-1 fw-bold">I'm Cianna</div>
-            <div class="display-6 fw-medium text-primary mb-3">
+            <div class="fs-5 fw-medium">hello!</div>
+            <div class="display-4 fw-bold">I'm Cianna</div>
+            <div class="fs-4 fw-medium text-primary mb-3">
               <span id="typed-text"></span>
             </div>
-            <p class="lead text-muted mb-4">
+            <p class="text-muted mb-3" style="font-size: 0.95rem;">
               My goal is to create designs that are fun, lively and meet the
               goals of my clientele by aligning random shapes and texts to
               create a cohesive design.
             </p>
             <a
               href="./codeassets/Portfoliolandingpage.html"
-              class="btn btn-lg rounded-5 bg-primary text-white fw-bold"
+              class="btn btn-md rounded-5 bg-primary text-white fw-bold"
             >my work!</a>
           </div>
 
-          <div class="col-md-6 text-center d-none d-md-block" data-aos="fade-left">
+          <div class="col-md-5 text-center d-none d-md-block" data-aos="fade-left">
             <img
-              class="img-thumbnail bg-primary-subtle w-100"
+              class="img-thumbnail bg-primary-subtle"
               src="codeassets/imagesfinalversions/WhatsApp Image 2025-11-24 at 12.31.46 AM.jpeg"
               alt="Cianna Crasto"
+              style="max-height: 320px; width: auto; object-fit: cover;"
             />
           </div>
 
@@ -540,14 +541,14 @@
     <footer class="py-3">
       <p class="mb-0">
         or email us @
-        <a href="mailto:crastocianna@gmail.com">crastocianna@gmail.com</a>
+        <a href="/cdn-cgi/l/email-protection#fc9f8e9d8f88939f959d92929dbc9b919d9590d29f9391"><span class="__cf_email__" data-cfemail="1370617260677c707a727d7d7253747e727a7f3d707c7e">[email&#160;protected]</span></a>
         &nbsp;or dm us&nbsp;
         <a href="https://www.instagram.com/designsbycianna/">@designsbycianna</a>
       </p>
     </footer>
 
     <!-- ══════════════ SCRIPTS ══════════════ -->
-    <script src="https://unpkg.com/typed.js@2.1.0/dist/typed.umd.js"></script>
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="https://unpkg.com/typed.js@2.1.0/dist/typed.umd.js"></script>
     <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
@@ -578,14 +579,4 @@
       const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
           if (entry.isIntersecting) {
-            entry.target.style.width = entry.target.dataset.width + '%';
-            observer.unobserve(entry.target);
-          }
-        });
-      }, { threshold: 0.3 });
-
-      document.querySelectorAll('.skill-bar-fill').forEach(bar => observer.observe(bar));
-    </script>
-
-  </body>
-</html>
+            entry.target.style.width = entry.tar
