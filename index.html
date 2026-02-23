@@ -111,7 +111,22 @@
   {color: #ffffff;
 }
 
+#typed-text {
+  color: #your-accent-colour; /* use whatever your brand colour is */
+  font-weight: bold;
+}
 
+/* Typed.js adds a blinking cursor automatically, but you can style it */
+.typed-cursor {
+  font-weight: 100;
+  opacity: 1;
+  animation: blink 0.7s infinite;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
       
     </style>
   </head>
@@ -207,7 +222,7 @@
                 <div class="display-1 fw-bold">I'm Cianna</div>
                 <div class="display-6 fw-medium text-primary">
                   communication designer
-                </div>
+                <span id="typed-text"></span></div>
               </div>
             </h1>
             <p class="lead my-4 text-muted justify-content-center">
@@ -409,6 +424,23 @@ crossorigin="anonymous"></script>
     tooltips.forEach(t=>{new bootstrap.Tooltips(t)
 
     })
+  <script>
+  var typed = new Typed('#typed-text', {
+    strings: [
+      'communication designer.',
+      'brand designer.',
+      'visual storyteller.',
+      'social media designer.',
+      'creative thinker.'
+    ],
+    typeSpeed: 60,       // how fast it types
+    backSpeed: 40,       // how fast it deletes
+    backDelay: 1500,     // how long it pauses before deleting
+    loop: true           // keeps cycling forever
+  });
+</script>
+  
 </script>
 </html> 
+
 
