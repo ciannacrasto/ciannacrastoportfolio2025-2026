@@ -34,13 +34,22 @@
 
       /* ── Hero zoom scroll ── */
       #hero-zoom {
-        position: relative;
+        position: sticky;
+        top: 0;
         height: 100vh;
         overflow: hidden;
         display: flex;
         align-items: center;
         justify-content: center;
         background-color: #ffffff;
+        z-index: 0;
+      }
+
+      /* Spacer that creates the scroll distance while hero stays sticky */
+      #hero-spacer {
+        height: 100vh;
+        position: relative;
+        z-index: 1;
       }
 
       #hero-bg {
@@ -82,6 +91,13 @@
       @keyframes bounce {
         0%, 100% { transform: translateY(0); }
         50%       { transform: translateY(6px); }
+      }
+
+      /* Everything after hero sits on top */
+      #main-content {
+        position: relative;
+        z-index: 2;
+        background: #fff;
       }
 
       /* ── Marquee ── */
@@ -268,7 +284,7 @@
       <div class="container-lg">
         <a href="index.html" class="navbar-brand d-flex align-items-center gap-2">
           <img
-            src="codeassets/imagesfinalversions/Artboard 1mdpi"
+            src="codeassets/imagesfinalversions/4.jpg"
             alt="Logo"
             style="width:40px"
             class="rounded-pill"
@@ -299,14 +315,19 @@
     </nav>
 
     <!-- ══════════════ HERO ══════════════ -->
-    <div id="hero-zoom">
-      <div id="hero-bg">
-        <img src="codeassets/imagesfinalversions/Artboard 1mdpi.jpg" alt="Designs by Cianna" />
-      </div>
-      <div id="hero-overlay">
-        <p class="hero-scroll-hint">scroll to enter ↓</p>
+    <div id="hero-spacer">
+      <div id="hero-zoom">
+        <div id="hero-bg">
+          <img src="codeassets/imagesfinalversions/Artboard%201mdpi.jpg" alt="Designs by Cianna" />
+        </div>
+        <div id="hero-overlay">
+          <p class="hero-scroll-hint">scroll to enter ↓</p>
+        </div>
       </div>
     </div>
+
+    <!-- Everything below slides over the hero -->
+    <div id="main-content">
 
     <!-- ══════════════ ABOUT ME ══════════════ -->
     <section id="aboutme">
@@ -574,11 +595,13 @@
       </div>
     </section>
 
+    </div><!-- end main-content -->
+
     <!-- ══════════════ FOOTER ══════════════ -->
     <footer class="py-3">
       <p class="mb-0">
         or email us @
-        <a href="/cdn-cgi/l/email-protection#fc9f8e9d8f88939f959d92929dbc9b919d9590d29f9391"><span class="__cf_email__" data-cfemail="1370617260677c707a727d7d7253747e727a7f3d707c7e">[email&#160;protected]</span></a>
+        <a href="mailto:crastocianna@gmail.com">crastocianna@gmail.com</a>
         &nbsp;or dm us&nbsp;
         <a href="https://www.instagram.com/designsbycianna/">@designsbycianna</a>
       </p>
@@ -604,22 +627,22 @@
         }
       });
 
-      // Scroll zoom hero effect
+      // Scroll zoom hero effect — sticky approach
       const heroBg = document.getElementById('hero-bg');
       const heroOverlay = document.getElementById('hero-overlay');
-      const heroZoom = document.getElementById('hero-zoom');
+      const heroSpacer = document.getElementById('hero-spacer');
 
       window.addEventListener('scroll', () => {
         const scrollY = window.scrollY;
-        const heroH = heroZoom.offsetHeight;
-        const progress = Math.min(scrollY / heroH, 1);
+        const spacerH = heroSpacer.offsetHeight;
+        const progress = Math.min(scrollY / spacerH, 1);
 
-        // Zoom in the background as user scrolls
-        const scale = 1 + progress * 0.6;
+        // Zoom OUT as user scrolls (starts at 1, shrinks to 0.6)
+        const scale = 1 - progress * 0.4;
         heroBg.style.transform = `scale(${scale})`;
 
-        // Fade out the text
-        heroOverlay.style.opacity = 1 - progress * 2;
+        // Fade out hint text quickly
+        heroOverlay.style.opacity = Math.max(0, 1 - progress * 3);
       });
 
       // Typed.js
