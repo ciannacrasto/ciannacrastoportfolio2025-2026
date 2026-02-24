@@ -241,6 +241,40 @@
         }
       }
 
+      /* ── Hero Logo ── */
+      #hero-logo-section {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 60px 24px;
+        transition: opacity 0.4s ease;
+      }
+
+      #hero-logo-inner {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      #hero-logo-img {
+        width: 340px;
+        max-width: 80vw;
+        height: auto;
+        display: block;
+      }
+
+      /* About me fades in on scroll */
+      #aboutme {
+        opacity: 0;
+        transform: translateY(40px);
+        transition: opacity 0.8s ease, transform 0.8s ease;
+      }
+
+      #aboutme.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
       /* ── Responsive ── */
       @media (max-width: 600px) {
         html {
@@ -302,15 +336,14 @@
       </div>
     </nav>
 
-    <!-- ══════════════ HERO VIDEO ══════════════ -->
-    <div class="mt-5 pt-4">
-      <div id="hero-video">
-        <video autoplay muted loop playsinline>
-          <source
-            src="codeassets/imagesfinalversions/Comp 1_1.mp4"
-            type="video/mp4"
-          />
-        </video>
+    <!-- ══════════════ HERO LOGO ══════════════ -->
+    <div id="hero-logo-section" class="mt-5 pt-4">
+      <div id="hero-logo-inner">
+        <img
+          src="codeassets/imagesfinalversions/Artboard 1mdpi.jpg"
+          alt="Designs by Cianna"
+          id="hero-logo-img"
+        />
       </div>
     </div>
 
@@ -656,7 +689,7 @@
     <footer class="py-3">
       <p class="mb-0">
         or email us @
-        <a href="mailto:crastocianna@gmail.com">crastocianna@gmail.com</a>
+        <a href="/cdn-cgi/l/email-protection#1477667567607b777d757a7a75547379757d783a777b79"><span class="__cf_email__" data-cfemail="fe9d8c9f8d8a919d979f90909fbe99939f9792d09d9193">[email&#160;protected]</span></a>
         &nbsp;or dm us&nbsp;
         <a href="https://www.instagram.com/designsbycianna/"
           >@designsbycianna</a
@@ -665,7 +698,7 @@
     </footer>
 
     <!-- ══════════════ SCRIPTS ══════════════ -->
-    <script src="https://unpkg.com/typed.js@2.1.0/dist/typed.umd.js"></script>
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="https://unpkg.com/typed.js@2.1.0/dist/typed.umd.js"></script>
     <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
@@ -674,6 +707,26 @@
     ></script>
 
     <script>
+      // Hero logo fade out on scroll, about me fade in
+      const heroLogo = document.getElementById('hero-logo-section');
+      const aboutSection = document.getElementById('aboutme');
+
+      window.addEventListener('scroll', () => {
+        const scrollY = window.scrollY;
+        const heroHeight = heroLogo.offsetHeight;
+
+        // Fade out logo as user scrolls down
+        const logoOpacity = Math.max(0, 1 - scrollY / (heroHeight * 0.6));
+        heroLogo.style.opacity = logoOpacity;
+
+        // Fade in about me section when logo starts disappearing
+        if (scrollY > heroHeight * 0.3) {
+          aboutSection.classList.add('visible');
+        } else {
+          aboutSection.classList.remove('visible');
+        }
+      });
+
       // Typed.js
       new Typed("#typed-text", {
         strings: [
@@ -698,16 +751,4 @@
           entries.forEach((entry) => {
             if (entry.isIntersecting) {
               entry.target.style.width = entry.target.dataset.width + "%";
-              observer.unobserve(entry.target);
-            }
-          });
-        },
-        { threshold: 0.3 },
-      );
-
-      document
-        .querySelectorAll(".skill-bar-fill")
-        .forEach((bar) => observer.observe(bar));
-    </script>
-  </body>
-</html>
+              obse
